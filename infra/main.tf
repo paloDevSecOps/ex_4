@@ -36,6 +36,14 @@ resource "aws_iam_role" "lambda_exec" {
   )
 }
 
+module "db" {
+  source        = "./modules/aws_rds_postgres"
+  db_name       = var.db_name
+  db_identifier = var.db_identifier
+  db_username   = var.db_username
+  db_password   = var.db_password
+
+}
 module "lambda_getExample" {
   source                    = "./modules/aws_lambda"
   lambda_function_name      = "getExample"

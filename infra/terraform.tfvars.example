@@ -5,5 +5,6 @@ lambda_function_name     =
 bucket_name              =
 bucket_key               =
 db_identifier            =
+db_name                  =
 db_username              =
 db_password              =
