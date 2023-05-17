@@ -18,17 +18,17 @@ variable "lambda_function_name" {
   description = "name of the lambda function"
 }
 
-
 variable "bucket_name" {
   type        = string
   description = "name of the bucket"
 }
 
-variable "bucket_key" {
-  type        = string
-  description = "key of the file in the bucket"
+variable "apis" {
+  type = list(object({
+    api_name = string
+    method   = string
+  }))
 }
-
 variable "db_identifier" {
   type        = string
   description = "db identifier"
