@@ -16,12 +16,30 @@ module "s3_object" {
   depends_on     = [module.ex_4_bucket]
 }
 
+resource "aws_iam_role" "lambda_exec" {
+  name = "lambda_exec_policy"
 
-
+  assume_role_policy = jsonencode(
+    {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Sid" : ""
+          "Principal" : {
+            "Service" : "lambda.amazonaws.com"
+          },
+          "Effect" : "Allow",
+          "Action" : "sts:AssumeRole",
+        }
+      ]
+    }
+  )
+}
 
 module "lambda_getExample" {
   source                    = "./modules/aws_lambda"
   lambda_function_name      = "getExample"
+  lambda_exec_role_arn      = aws_iam_role.lambda_exec.arn
   s3_bucket_name            = module.ex_4_bucket.s3_bucket_name
   s3_bucket_key             = var.bucket_key
   handler                   = "index.handler"
@@ -29,6 +47,7 @@ module "lambda_getExample" {
   rest_api_id               = module.ex_4_api_gateway.rest_api_id
   resource_id               = module.ex_4_api_gateway.method_resource_id
   http_method               = module.ex_4_api_gateway.method_http_method
+  integration_http_method   = "POST"
   api_gateway_execution_arn = module.ex_4_api_gateway.execution_arn
   depends_on                = [module.s3_object]
 }

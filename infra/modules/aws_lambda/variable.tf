@@ -1,7 +1,10 @@
+variable "lambda_exec_role_arn" {
+  type        = string
+  description = "arn of the lambda execution role"
+}
 variable "lambda_function_name" {
   type        = string
   description = "name of the lambda function"
-
 }
 
 variable "s3_bucket_name" {
@@ -24,20 +27,20 @@ variable "runtime" {
   description = "runtime of the lambda function"
 }
 
-variable "root_proxy_rest_api_id" {
-  type        = string
-  description = "root proxy rest api id"
-}
+# variable "root_proxy_rest_api_id" {
+#   type        = string
+#   description = "root proxy rest api id"
+# }
 
-variable "root_proxy_resource_id" {
-  type        = string
-  description = "root proxy method resource id"
-}
+# variable "root_proxy_resource_id" {
+#   type        = string
+#   description = "root proxy method resource id"
+# }
 
-variable "root_proxy_http_method" {
-  type        = string
-  description = "root proxy method http method"
-}
+# variable "root_proxy_http_method" {
+#   type        = string
+#   description = "root proxy method http method"
+# }
 
 variable "rest_api_id" {
   type        = string
@@ -54,6 +57,10 @@ variable "http_method" {
   description = "api gateway method http method"
 }
 
+variable "integration_http_method" {
+  type        = string
+  description = "api gateway integration http method"
+}
 variable "api_gateway_execution_arn" {
   type        = string
   description = "api gateway execution arn"

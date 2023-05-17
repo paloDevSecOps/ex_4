@@ -1,23 +1,3 @@
-resource "aws_iam_role" "lambda_exec" {
-  name = "lambda_exec_policy"
-
-  assume_role_policy = jsonencode(
-    {
-      "Version" : "2012-10-17",
-      "Statement" : [
-        {
-          "Sid" : ""
-          "Principal" : {
-            "Service" : "lambda.amazonaws.com"
-          },
-          "Effect" : "Allow",
-          "Action" : "sts:AssumeRole",
-        }
-      ]
-    }
-  )
-}
-
 resource "aws_lambda_function" "lambda_function" {
   function_name = var.lambda_function_name
   s3_bucket     = var.s3_bucket_name
@@ -26,7 +6,7 @@ resource "aws_lambda_function" "lambda_function" {
   handler = var.handler
   runtime = var.runtime
 
-  role = aws_iam_role.lambda_exec.arn
+  role = var.lambda_exec_role_arn
 }
 
 resource "aws_api_gateway_integration" "api_gateway_integration" {
@@ -34,7 +14,7 @@ resource "aws_api_gateway_integration" "api_gateway_integration" {
   resource_id = var.resource_id
   http_method = var.http_method
 
-  integration_http_method = "POST"
+  integration_http_method = var.integration_http_method
   type                    = "AWS_PROXY"
   uri                     = aws_lambda_function.lambda_function.invoke_arn
 }
