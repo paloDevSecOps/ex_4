@@ -1,0 +1,9 @@
+shared_credentials_files =
+profile                  =
+api_gateway_name         =
+lambda_function_name     =
+bucket_name              =
+bucket_key               =
+db_identifier            =
+db_username              =
+db_password              =
