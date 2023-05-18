@@ -1,12 +1,29 @@
-"use strict";
+const pg = require("pg");
 
-exports.handler = function (event, context, callback) {
-  var response = {
-    statusCode: 200,
-    headers: {
-      "Content-Type": "text/html; charset=utf-8",
-    },
-    body: "getUser!",
-  };
-  callback(null, response);
+const { Client } = pg;
+
+module.exports.handler = async (requestBody) => {
+  try {
+    const client = new Client({
+      host: "palodevsecops.clqlzzlfgyxm.ap-southeast-1.rds.amazonaws.com",
+      user: "postgres",
+      database: "palodevsecops",
+      password: "palodevsecops",
+      port: 5432,
+    });
+
+    await client.connect();
+
+    const res = await client.query(`SELECT *  FROM test_users`);
+
+    await client.end();
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify(res.rows),
+    };
+  } catch (err) {
+    console.log("Error while trying to connect to db");
+    return err;
+  }
 };

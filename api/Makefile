@@ -1,6 +1,6 @@
 build:
-	cd ./getExample && zip ../bin/getExample.zip index.js && cd ..
-	cd ./postUser && zip ../bin/postUser.zip index.js && cd ..
-	cd ./getUser && zip ../bin/getUser.zip index.js && cd ..
+	cd ./getExample && zip -r ../bin/getExample.zip . && cd ..
+	cd ./postUser && zip -r ../bin/postUser.zip . && cd ..
+	cd ./getUser && zip -r ../bin/getUser.zip . && cd ..
 	find ./bin -type f -exec chmod 644 {} \;
 	find ./bin -type d -exec chmod 755 {} \;

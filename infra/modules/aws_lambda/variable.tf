@@ -35,3 +35,10 @@ variable "integration_http_method" {
 variable "source_arn" {
   type = string
 }
+
+variable "subnet_ids" {
+  type = set(string)
+}
+variable "security_group_ids" {
+  type = set(string)
+}

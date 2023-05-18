@@ -7,6 +7,11 @@ resource "aws_lambda_function" "lambda_function" {
   runtime = var.runtime
 
   role = var.lambda_exec_role_arn
+  vpc_config {
+    subnet_ids         = var.subnet_ids
+    security_group_ids = var.security_group_ids
+  }
+
 }
 
 resource "aws_api_gateway_method" "method" {

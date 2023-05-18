@@ -10,6 +10,6 @@ output "base_url" {
   value = aws_api_gateway_deployment.ex_4_dev.invoke_url
 }
 
-# output "db_login" {
-#   value = "psql -h ${module.db.hostname} -p ${module.db.port} -U ${module.db.username} postgres"
-# }
+output "db_login_command" {
+  value = "psql -h ${module.db.hostname} -p ${module.db.port} -U ${module.db.username} postgres"
+}
