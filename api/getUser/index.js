@@ -25,7 +25,7 @@ module.exports.handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: `new user: ${res.rows}`,
+        message: "successfully insert new user",
       }),
     };
   } catch (err) {
