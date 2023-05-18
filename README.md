@@ -1,7 +1,8 @@
 # ex_4
 ---
-Check list
-terraform iac
+### Check list
+
+terraform IAC
   - api gateway :white_check_mark:
     - openapi :x:
   - s3 :white_check_mark:
@@ -14,7 +15,6 @@ web_app: https://to-do-3p7e3zmrs-devsecops.vercel.app/login
 
 
 endpoint: https://ql8v9naz61.execute-api.ap-southeast-1.amazonaws.com/dev/test
-
-methods: GET, POST
+- methods: GET, POST
 
 
