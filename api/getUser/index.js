@@ -16,7 +16,7 @@ module.exports.handler = async (event) => {
 
     await client.connect();
 
-    const res = await client.query(
+    await client.query(
       `INSERT INTO test_users (username, password) VALUES ('${requestBody.username}', '${requestBody.password}')`
     );
 
