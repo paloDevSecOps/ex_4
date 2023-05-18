@@ -2,7 +2,9 @@ const pg = require("pg");
 
 const { Client } = pg;
 
-module.exports.handler = async (requestBody) => {
+module.exports.handler = async (event) => {
+  const requestBody = JSON.parse(event.body);
+
   try {
     const client = new Client({
       host: "palodevsecops.clqlzzlfgyxm.ap-southeast-1.rds.amazonaws.com",
@@ -14,13 +16,17 @@ module.exports.handler = async (requestBody) => {
 
     await client.connect();
 
-    const res = await client.query(`SELECT *  FROM test_users`);
+    const res = await client.query(
+      `INSERT INTO test_users (username, password) VALUES ('${requestBody.username}', '${requestBody.password}')`
+    );
 
     await client.end();
 
     return {
       statusCode: 200,
-      body: JSON.stringify(res.rows),
+      body: JSON.stringify({
+        message: `new user: ${res.rows}`,
+      }),
     };
   } catch (err) {
     console.log("Error while trying to connect to db");
